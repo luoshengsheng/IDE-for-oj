@@ -1,0 +1,288 @@
+﻿<!DOCTYPE xhtml>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>IDE-for-oj</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/ext/bootstrap.min.css">
+    <link href="css/ext/bootstrap-switch.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="js/ext/jquery.min.js" type="text/javascript"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/ext/bootstrap.min.js"></script>
+    <script src="js/ext/bootstrap-switch.min.js"></script>
+
+    <link href="css/editor.css" rel="stylesheet">
+    <!-- 定义了一个全局变量OPTIONS 放置相关信息 -->
+    <script src="client-options.js"></script>
+    <script src="js/compiler.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <!-- nav -->
+    <div class="bodyClass">
+        <div class="left" id="left">
+            <div class="sidebar-menu">
+                <div class="menu-first" >
+                    <a href="#fileMeun" data-toggle="collapse">
+                        File Manage
+                    </a>
+                </div>
+                <!-- 给类collapse加上in就是展开 collapse.in -->
+                <ul id="fileMeun" class="nav nav-list collapse.in menu-second">
+                    <li class="templateFile"></li> 
+                    <li>
+                        <a href="#" id="newFile">new file
+                            <!-- <div class="icondiv">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </div>
+                            <div class="icondiv">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </div> -->
+                        </a>
+                    </li>
+                    <!-- <li><a href="#userMeun2" data-toggle="collapse"> 新增文件</a></li> 
+                        <ul id="userMeun2" class="nav nav-list collapse menu-third">
+                            <li><a href="#">file1</a></li>
+                        </ul> -->
+                </ul>
+                <div class="menu-first" >
+                    <a href="#fileMenu" data-toggle="collapse"></a>
+                </div>
+                <!-- <ul id="fileMenu" class="nav nav-list collapse menu-second">
+                    <li><a href="#"> file1</a></li>
+                    <li><a href="#"> file2</a></li>
+                </ul> -->
+            </div>
+        </div><!-- left -->
+        <div class="right">
+            <div class="rightbody">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- <a class="navbar-brand" href="#" style="padding:0px 5px;"><img src="images/brand.png" alt=""></a> -->
+                            <a class="navbar-brand" href="#">IDE - <span class="language-name"></span></a>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <!-- <li class="active fontsize"> -->
+                                <li class="fontsize">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">font size<span class="caret"></span></a>
+                                    <!-- <a href="#">font size<span class="sr-only">(current)</span></a> -->
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#" value="12">12px</a></li>
+                                        <li><a href="#" value="14">14px</a></li>
+                                        <li><a href="#" value="16">16px</a></li>
+                                        <li><a href="#" value="18">18px</a></li>
+                                        <li><a href="#" value="20">20px</a></li>
+                                        <li><a href="#" value="22">22px</a></li>
+                                        <li><a href="#" value="24">24px</a></li>
+                                        <li><a href="#" value="26">26px</a></li>
+                                        <li><a href="#" value="28">28px</a></li>
+                                        <li><a href="#" value="30">30px</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" value="35">35px</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" value="40">40px</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" value="50">50px</a></li>
+                                    </ul>
+                                </li>
+                                <li class="theme">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">theme<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#" theme="ace/theme/github" type="light">亮色主题1</a></li>
+                                        <li><a href="#" theme="ace/theme/dawn" type="light">亮色主题2</a></li>
+                                        <li><a href="#" theme="ace/theme/crimson_editor" type="light">亮色主题3</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" theme="ace/theme/tomorrow_night_blue" type="dark">暗色主题1</a></li>
+                                        <li><a href="#" theme="ace/theme/merbivore" type="dark">暗色主题2</a></li>
+                                        <li><a href="#" theme="ace/theme/kr_theme" type="dark">暗色主题3</a></li>
+                                        <li><a href="#" theme="ace/theme/twilight" type="dark">暗色主题4</a></li>
+                                    </ul>
+                                </li>
+                                <li class="language">
+                                    <a href="#">language</a>
+                                </li>
+                                <!-- language -->
+                                <li>
+                                    <select class="form-control languageSelect">
+                                        <option value ="C">C</option>
+                                        <option value ="C++">C++</option>
+                                        <option value ="java">java</option>
+                                    </select>
+                                </li>
+                                <li class="dropdown" id="compilersList">
+                                    <a href="#">compilers</a>
+                                </li>
+                                <!-- compilers -->
+                                <li>
+                                    <select class="form-control compilerSelect">
+                                    </select>
+                                </li>
+                            </ul>
+                            <!-- <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form> -->
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#">sync</a></li>
+                                <li>
+                                    <a href="#" class="sync-switch">
+                                        <input id="sync-state" type="checkbox" checked data-size="mini">
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="showUsername">
+                                        <% if (user) { %>
+                                            <%= user.name %>
+                                        <% } %> 
+                                    <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/reg">注册</a></li>
+                                       <!--  <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li> -->
+                                        <li class="divider"></li>
+                                        <li><a href="/logout">登出</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+    
+                <div class="allContent">
+                    <!-- editor -->
+                    <div id="editor"></div>
+                    
+                    <!-- button -->
+                    <div id="submitButton" class="btn-group btn-group-justified" style="border:2px solid #d9edF7;border-radius:5px;" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" id="ioContentHide">input-output</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default compileButton">提交测试</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" data-target="#saveFile" data-toggle="modal" >save as</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" id="updateButton">updateFile</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default loadButton">load template</button>
+                        </div>
+                    </div>
+                    <!-- compiler input output -->
+                    <!-- <span class="compilerVersion"></span> -->
+                    <div class="inputOutput">
+                        <div class="ioContent" id="ioContent">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">compile input &mdash; language&mdash;<span class="language-name"></span></div>
+                                <div class="panel-body result">
+                                    <div class="compiler-input">
+                                        <textarea class="inputData" name=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-info">
+                                <div class="panel-heading">compile output &mdash; language&mdash;<span class="language-name"></span></div>
+                                <div class="panel-body result">
+                                    <div class="compiler-output outputResult">
+                                        <p class="template"></p>
+                                        <!-- <p><a href="#">4 : error: ‘jg’ was not declared in this scope</a></p>
+                                        <div class="error inline-msg">
+                                            <span class="icon erroricon">!!</span>
+                                            <span class="msg">error: ‘jg’ was not declared in this scope</span>
+                                        </div>
+                                        <div class="warning inline-msg">
+                                            <span class="icon warningicon">!!</span>
+                                            <span class="msg">error: ‘jg’ was not declared in this scope</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- ioContent -->
+                    </div>
+                </div><!-- allContent -->
+            </div><!-- rightbody -->
+        </div><!-- right -->
+    </div><!-- bodyclass -->
+    <!-- hide model -->
+    <div id="saveDialog" class="modal hide">
+        <div class="template lang c">// Type your code here
+#include &ltstdio.h&gt
+int main(void){
+    printf("hello world!!!!!");
+}</div>
+        <div class="template lang cc">// Type your code here
+#include &ltiostream&gt
+using namespace std;
+int main(void){
+    cout&lt&lt"hello world!"&lt&ltendl;
+    return 0;
+}</div>
+        <div class="template lang java">// Type your code here
+public class Test{
+    public static void main(String [] arg){
+        System.out.println("hello world!");
+    }
+}</div>
+    </div>
+    <!-- 模态框 -->
+    <div class="modal fade" id="saveFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- <form action="/test/post" method="post"> -->
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="recipient-name" class="control-label">文件名:</label>
+                <input type="text" name="filename" class="form-control" id="filename">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveFileButton">提交</button>
+          </div>
+        <!-- </form> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Small modal -->
+    <div id="deleteFile" class="modal fade bs-example-modal-sm smModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <center>是否删除文件?</center>
+                <input type="hidden" class="form-control" id="file-name">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+            <button type="button" class="btn btn-primary" id="deleteButton">是</button>
+        </div>
+    </div>
+</body>
+<script src="js/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/src-noconflict/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/src-noconflict/snippets/java.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/src-noconflict/snippets/c_cpp.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/editor.js" type="text/javascript"></script>
+<script src="js/initpage.js" type="text/javascript"></script>
+
+<script>
+    $("#sync-state").bootstrapSwitch();
+</script>
+</html>

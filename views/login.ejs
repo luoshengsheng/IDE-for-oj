@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- <link rel="shortcut icon" href="images/favicon.png"> -->
+
+	<title>login</title>
+	<!-- Bootstrap core CSS -->
+	<link href="./css/ext/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="./css/login.css" rel="stylesheet" />	
+</head>
+
+<body class="loginBody">
+
+<div id="cl-wrapper" class="login-container">
+	<div class="middle-login">
+		<div class="block-flat">
+			<div class="header">							
+				<h3 class="text-center">Welcome to IDE-for-oj</h3>
+			</div>
+			<div>
+				<form style="margin-bottom: 0px !important;" class="form-horizontal" action="/login" method="post">
+					<div class="content">
+						<h4 class="title">Login Access</h4>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-user">用户名</i></span>
+									<input type="text" placeholder="Username" id="username" name="username" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock">密&nbsp;&nbsp;&nbsp;码</i></span>
+									<input type="password" placeholder="Password" id="password" name="password" class="form-control">
+								</div>
+							</div>
+						</div>
+						<!-- <div class="form-group">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="fa fa-lock">验证码</i></span>
+									<input type="authcode" placeholder="authcode" id="authcode" class="form-control">
+								</div>
+							</div>
+						</div> -->
+						<% if (error) { %>
+							<div class="alert alert-danger">
+							<%= error %>
+							</div>
+						<% } %>
+					</div>
+					<div class="foot">
+						<button class="btn btn-default" data-dismiss="modal" type="button" id="register">Register</button>
+						<button class="btn btn-primary" data-dismiss="modal" type="submit">Login</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="text-center out-links"><a href="#">&copy; 2015 shengsheng luo</a></div>
+	</div> 
+	
+</div>
+
+<script src="./js/ext/jquery.min.js"></script>
+<script src="./js/ext/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$("#register").click(function(){
+	    location.href='/reg';
+	});
+</script>
+</body>
+</html>
