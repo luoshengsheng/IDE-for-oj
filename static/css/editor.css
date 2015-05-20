@@ -174,13 +174,16 @@
 .panel-body{
     height: 100%;
 }
-.inputData{
+.compiler-input textarea{
     border: 2px solid #d9edF7;
     border-radius: 5px;
     overflow: auto;
-    width: 100%;
+    margin-left:15px; 
+    width: 46%;
     height: 100%;
     float: left;
+}
+.inputData{
 }
 .outputResult {
     height: 100%;

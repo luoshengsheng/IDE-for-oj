@@ -40,21 +40,12 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
     editor.commands.bindKey("f9", function(editor) {
         requireCompile();
     }); 
-     
-    //获取localstorage变量值
-    function getSetting(name) {
-        return window.localStorage[windowLocalPrefix + "." + name];
-    }
 
-    function setSetting(name, value) {
-        window.localStorage[windowLocalPrefix + "." + name] = value;
-    }
-
-    var codeText = getSetting('code');
-    //如果code为空 ，，获得默认值
-    if (!codeText) {
-        codeText = getLanguageTemplate(lang);
-    }
+    // var codeText = getSetting('code');
+    // //如果code为空 ，，获得默认值
+    // if (!codeText) {
+    //     codeText = getLanguageTemplate(lang);
+    // }
     function getLanguageTemplate(language){
         var template = '';
         switch(language.replace(/[^a-zA-Z]/g, 'C').toLowerCase())
@@ -71,7 +62,6 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
         return getSetting(template);
     }
     // if (codeText) editor.getSession().setValue(codeText);
-    if (codeText) editor.getSession().setValue('//type your code here!');
 
     //编译器改变时 重新编译
     domRoot.find('.compilerSelect').change(onCompilerChange);
@@ -127,8 +117,8 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
         if (!data.code === 0) {
             stderr += "\nCompilation failed";
         }
-        stderr +="\n请检查input，代码是否正确！";
         //去掉原先的内容
+        $('.outputData').val("");
         $('.compiler-output :gt(0)').remove();
         editor.getSession().clearAnnotations();
 
@@ -143,8 +133,12 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
         var numLines = 0;
         //解析编译器返回信息
         if (runningStdout) {
-            $('.compiler-output .template').clone().appendTo('.compiler-output').removeClass('template').text(stdout);
+            $('.outputData').val(runningStdout);
         }else if(stderr){
+        	stderr +="\n请检查input，代码是否正确！";
+        	// if(stderr.match(/undefined reference to `main'/)){
+        	// 	stderr = "Compile OK!";
+        	// }
             var errHtmlArray = [];
             parseLines(stderr, function (lineNum, lineColumn,msg) {
                 //最多处理输出信息50行
@@ -199,14 +193,12 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
         if (pendingTimeout) clearTimeout(pendingTimeout);
         pendingTimeout = setTimeout(function () {
             var data = {
-                source: editor.getSession().getValue(),
+                source: getSource(),
                 compiler: $('.compilerSelect').val(),
                 language: $('.languageSelect').val(),
                 inputData: $(".inputData").val(),
                 options: '',
             };
-            setSetting('compiler', data.compiler);
-            setSetting('language', data.language);
             setSetting('compilerOptions', data.options);
             setSetting('inputData',data.inputData);
             var stringifiedReq = JSON.stringify(data);
@@ -227,7 +219,7 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
                 }
             });
         }, 750);
-        setSetting('code', editor.getSession().getValue());
+        // setSetting('code', editor.getSession().getValue());
     }
 
     function setSource(code) {
@@ -251,9 +243,9 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
     //解序列化
     function deserialiseState(state) {
         if (state.hasOwnProperty('sourcez')) {
-            editor.getSession().setValue(LZString.decompressFromBase64(state.sourcez));
+            setSource(LZString.decompressFromBase64(state.sourcez));
         } else {
-            editor.getSession().setValue(state.source);
+            setSource(state.source);
         }
         state.compiler = mapCompiler(state.compiler);
         domRoot.find('.compilerSelect').val(state.compiler);
@@ -272,6 +264,8 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
         }
     }
     function onCompilerChange() {
+    	var compiler = $('.compilerSelect').val();
+        setSetting('compiler', compiler);
         onChange();
         var compiler = compilersById[$('.compilerSelect').val()];
         if (compiler === undefined)
@@ -289,6 +283,7 @@ function Compiler(domRoot, windowLocalPrefix, lang) {
             defaultCompiler = OPTIONS.java_defaultCompiler;
         }
         setCompilers(OPTIONS.compilers,defaultCompiler,language);
+        setSetting('language', language);
     }
 
     //请求运行
